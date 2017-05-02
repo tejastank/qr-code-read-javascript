@@ -26,7 +26,7 @@ var app = new Vue({
     httpAction: store.get('http-action') || { enabled: false },
     activeCameraId: store.get('active-camera-id') || null,
     playAudio: store.get('play-audio') || true,
-    allowBackgroundScan: store.get('background-scan') || false
+    allowBackgroundScan: store.get('background-scan') || true
   },
   methods: {
     start: function () {
@@ -248,7 +248,7 @@ var app = new Vue({
     downloadHistory: function () {
       var content = JSON.stringify(this.scans, null, '  ');
       var blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-      saveAs(blob, 'instascan.json');
+      saveAs(blob, 'snippetbucket-download-history.json');
     },
 
     isHttpUrl: function (string) {
@@ -286,7 +286,7 @@ var app = new Vue({
         this.chime.play();
       }
 
-      var message = 'Scanned: '
+      var message = 'SnippetBucket: '
         + content
         + '<a href="#" class="clipboard-copy" data-dismiss="snackbar" data-clipboard="'
         + escapeHtml(content)
